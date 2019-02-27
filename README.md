@@ -3,6 +3,6 @@ Termial app to scan files in current or parents directories to get the largest s
 ## Usage
 
 scan up to one level
-```scanFileUpto(1, __dirname)```
 
+```scanFileUpto(1, __dirname)```
 
