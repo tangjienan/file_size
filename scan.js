@@ -10,18 +10,20 @@ let globalCount = 0
 var scanFileUpto = function(level, currentFolder) {
     if (level != 0) {
         let absFile = path.join(currentFolder, "..");
+        console.log(absFile)
         scanFileUpto(level - 1, absFile)
     }
     readFolder(currentFolder)
-    
 }
 
 var readFolder = function(currentFolder) {
     fs.readdir(currentFolder, (err, files) => {
+        if (files == undefined) return
         files.forEach(file => {
           //if (file === "Terminal.app") return
           let absFile = path.join(currentFolder, file);
           if (is_dir(absFile)) {
+              //console.log(absFile)
               globalCount += 1
               readFolder(absFile)
           } else {
@@ -36,6 +38,7 @@ var readFolder = function(currentFolder) {
           }
         });
         globalCount -= 1
+        console.log(globalCount)
         if (globalCount == 0) {
            largest(10)
         }
@@ -49,7 +52,7 @@ function getFilesizeInBytes(filename) {
             return fileSizeInBytes / (1024 * 1024)
         }
         catch(err) {
-            console.log('it does not exist');
+            //console.log('it does not exist');
             return -1;
     }
    
